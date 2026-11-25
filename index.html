@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHAN EDUCATION | SSC 2027 Online Portal</title>
+  <style>
+    :root {
+      --primary: #0f4c81;
+      --primary-dark: #0a355c;
+      --accent: #f59e0b;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 18px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 1.6rem; letter-spacing: 0.5px; }
+    header p { font-size: 0.9rem; opacity: 0.9; margin-top: 4px; }
+    .container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(15, 76, 129, 0.05);
+    }
+    .card h2 { color: var(--primary); font-size: 1.25rem; margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 8px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 8px;
+      font-size: 1rem; outline: none; transition: border 0.2s;
+    }
+    input:focus { border-color: var(--primary); }
+    .btn {
+      display: inline-block; background: var(--primary); color: #fff; border: none;
+      padding: 11px 20px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; text-align: center; transition: background 0.2s;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .btn-accent { background: var(--accent); color: #111827; }
+    .btn-accent:hover { background: #d97706; color: #fff; }
+    .btn-danger { background: var(--danger); font-size: 0.85rem; padding: 7px 14px; }
+    .btn-block { width: 100%; }
+    .alert { padding: 12px 14px; border-radius: 8px; margin-top: 12px; font-size: 0.92rem; display: none; }
+    .alert-error { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
+    .alert-info { background: #eff6ff; color: var(--primary); border: 1px solid #bfdbfe; display: block; }
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+    }
+    .badge-paid { background: #dcfce7; color: var(--success); }
+    .badge-due { background: #fee2e2; color: var(--danger); }
+    .resource-box {
+      border: 1px solid var(--border); border-radius: 10px; padding: 16px; background: #f8fafc;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .resource-box h3 { font-size: 1.05rem; color: var(--primary-dark); margin-bottom: 6px; }
+    .resource-box p { font-size: 0.88rem; color: var(--muted); margin-bottom: 12px; }
+    .hidden { display: none !important; }
+    .topbar-user {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      gap: 10px; background: #eef6ff; padding: 14px 18px; border-radius: 10px; margin-bottom: 20px;
+      border: 1px solid #bfdbfe;
+    }
+    footer { text-align: center; padding: 20px; color: var(--muted); font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>KHAN EDUCATION (খান এডুকেশন)</h1>
+  <p>SSC 2027 অনলাইন প্রস্তুতি ব্যাচ পোর্টাল | Mathematics • Physics • Chemistry • English</p>
+</header>
+
+<div class="container">
+
+  <!-- লগইন সেকশন -->
+  <div id="loginSection">
+    <div class="grid-2">
+      <div class="card">
+        <h2>শিক্ষার্থী লগইন (Student Login)</h2>
+        <p style="font-size:0.9rem; color:var(--muted); margin-bottom:14px;">
+          ক্লাস নোটস, সাজেশন ও হোমওয়ার্ক জমা দিতে আপনার <b>Student ID</b> ও <b>PIN</b> দিন।
+        </p>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="studentId">Student ID</label>
+            <input type="text" id="studentId" placeholder="যেমন: KE2701" required />
+          </div>
+          <div class="form-group">
+            <label for="studentPin">PIN Code</label>
+            <input type="password" id="studentPin" placeholder="আপনার ৪ সংখ্যার PIN দিন" required />
+          </div>
+          <button type="submit" id="loginBtn" class="btn btn-block">পোর্টালে প্রবেশ করুন</button>
+        </form>
+        <div id="loginError" class="alert alert-error"></div>
+      </div>
+
+      <div class="card">
+        <h2>নতুন ভর্তি ও কোর্স ফি নিয়মাবলি</h2>
+        <div class="alert alert-info" style="margin-top:0; margin-bottom:12px;">
+          <b>ভর্তি চলছে!</b> আগামি SSC 2027 পরীক্ষার পূর্ণাঙ্গ প্রস্তুতি ব্যাচ।
+        </div>
+        <ul style="padding-left:18px; font-size:0.92rem; margin-bottom:16px;">
+          <li><b>কোর্স ফি পরিশোধ:</b> ন্যূনতম <b>২ কিস্তিতে (Installments)</b> পরিশোধের সুবিধা রয়েছে।</li>
+          <li><b>১ম কিস্তি:</b> ভর্তির সময় পরিশোধ করে Student ID ও PIN সংগ্রহ করতে হবে।</li>
+          <li><b>২য় কিস্তি:</b> নির্ধারিত তারিখের মধ্যে পরিশোধ না করলে পোর্টাল অ্যাক্সেস সাময়িকভাবে স্থগিত হয়ে যাবে।</li>
+        </ul>
+        <a href="https://wa.me/8801540128813?text=আসসালামু%20আলাইকুম,%20আমি%20KHAN%20EDUCATION-এর%20SSC%202027%20অনলাইন%20ব্যাচে%20ভর্তি%20হতে%20ইচ্ছুক।" target="_blank" class="btn btn-accent btn-block">
+          WhatsApp-এ মেসেজ দিয়ে ভর্তি হন
+        </a>
+        <p style="font-size:0.86rem; color:var(--muted); margin-top:12px;">
+          যেকোনো প্রয়োজনে যোগাযোগ:<br/>
+          <b>WhatsApp:</b> 01540-128813 | <b>কল:</b> 01345350508
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- স্টুডেন্ট ড্যাশবোর্ড -->
+  <div id="dashboardSection" class="hidden">
+    <div class="topbar-user">
+      <div>
+        <div style="font-size:1.1rem; font-weight:700; color:var(--primary-dark);">
+          স্বাগতম, <span id="dispName">Student</span>!
+        </div>
+        <div style="font-size:0.88rem; color:var(--muted);">
+          ID: <b id="dispId"></b> |
+          ১ম কিস্তি: <span id="dispInst1" class="badge"></span> |
+          ২য় কিস্তি: <span id="dispInst2" class="badge"></span>
+        </div>
+      </div>
+      <button onclick="logout()" class="btn btn-danger">লগআউট (Logout)</button>
+    </div>
+
+    <!-- নোটিশ বোর্ড -->
+    <div class="card">
+      <h2>গুরুত্বপূর্ণ নোটিশ (Notice Board)</h2>
+      <p style="font-size:0.94rem;">
+        • নিয়মিত ক্লাস নোটস ও প্র্যাকটিস শিট নিচের ফোল্ডার থেকে দেখে অনুশীলন করো।<br/>
+        • প্রতি সপ্তাহের হোমওয়ার্ক (H.W) পরিষ্কার ছবি তুলে বা PDF করে নিচের লিংকে জমা দাও।
+      </p>
+    </div>
+
+    <!-- স্টাডি ম্যাটেরিয়াল ও হোমওয়ার্ক -->
+    <div class="card">
+      <h2>স্টাডি ম্যাটেরিয়াল ও হোমওয়ার্ক</h2>
+      <div class="grid-2">
+        <div class="resource-box">
+          <div>
+            <h3>১. ক্লাস নোটস ও সাজেশন</h3>
+            <p>Mathematics, Physics, Chemistry এবং English-এর অধ্যায়ভিত্তিক লেকচার শিট ও PDF ফাইল।</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1edMNLqtnar5cB0gWCCb0RP2b-SCnjdbJ?usp=sharing" target="_blank" class="btn">
+            ক্লাস ফোল্ডার ওপেন করুন
+          </a>
+        </div>
+
+        <div class="resource-box">
+          <div>
+            <h3>২. হোমওয়ার্ক জমা দিন (H.W Upload)</h3>
+            <p>তোমার সমাধান করা হোমওয়ার্কের ছবি বা PDF ফাইল সরাসরি এখান থেকে আপলোড করো।</p>
+          </div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScQCARlwyal5zmOEd3pZPYggf4-0F6MFFvfCyUAnWZMDwRrYA/viewform?usp=header" target="_blank" class="btn btn-accent">
+            হোমওয়ার্ক জমা দিন
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 KHAN EDUCATION (খান এডুকেশন) | WhatsApp: 01540-128813 | Phone: 01345350508
+</footer>
+
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyntjkGgPS5A5r52kUTs6Dwsx2OR59GKJnz1MgdZ932THyDVUWE2rcfQFSJA0Xv1lX/exec";
+
+  const loginForm = document.getElementById("loginForm");
+  const loginError = document.getElementById("loginError");
+  const loginBtn = document.getElementById("loginBtn");
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedUser = localStorage.getItem("ke_ssc2027_user");
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      verifyAndRender(user.studentId, user.pin, true);
+    }
+  });
+
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const id = document.getElementById("studentId").value.trim();
+    const pin = document.getElementById("studentPin").value.trim();
+    verifyAndRender(id, pin, false);
+  });
+
+  function verifyAndRender(id, pin, silent) {
+    loginError.style.display = "none";
+    if (!silent) {
+      loginBtn.disabled = true;
+      loginBtn.textContent = "যাচাই করা হচ্ছে...";
+    }
+
+    const url = `${SCRIPT_URL}?id=${encodeURIComponent(id)}&pin=${encodeURIComponent(pin)}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        loginBtn.disabled = false;
+        loginBtn.textContent = "পোর্টালে প্রবেশ করুন";
+
+        if (data.success) {
+          localStorage.setItem("ke_ssc2027_user", JSON.stringify({ studentId: id, pin: pin }));
+          showDashboard(data);
+        } else {
+          localStorage.removeItem("ke_ssc2027_user");
+          showLogin();
+          loginError.textContent = data.message || "লগইন ব্যর্থ হয়েছে।";
+          loginError.style.display = "block";
+        }
+      })
+      .catch(() => {
+        loginBtn.disabled = false;
+        loginBtn.textContent = "পোর্টালে প্রবেশ করুন";
+        loginError.textContent = "ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+        loginError.style.display = "block";
+      });
+  }
+
+  function showDashboard(data) {
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("dashboardSection").classList.remove("hidden");
+    document.getElementById("dispName").textContent = data.name;
+    document.getElementById("dispId").textContent = data.studentId;
+
+    const b1 = document.getElementById("dispInst1");
+    b1.textContent = data.installment1 || "Due";
+    b1.className = "badge " + (b1.textContent.toLowerCase() === "paid" ? "badge-paid" : "badge-due");
+
+    const b2 = document.getElementById("dispInst2");
+    b2.textContent = data.installment2 || "Due";
+    b2.className = "badge " + (b2.textContent.toLowerCase() === "paid" ? "badge-paid" : "badge-due");
+  }
+
+  function showLogin() {
+    document.getElementById("dashboardSection").classList.add("hidden");
+    document.getElementById("loginSection").classList.remove("hidden");
+  }
+
+  function logout() {
+    localStorage.removeItem("ke_ssc2027_user");
+    document.getElementById("studentId").value = "";
+    document.getElementById("studentPin").value = "";
+    showLogin();
+  }
+</script>
+</body>
+</html>
