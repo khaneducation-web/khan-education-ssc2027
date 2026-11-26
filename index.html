@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHAN EDUCATION • SSC 2027 Student Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-alt: #f9fafe;
+      --primary: #1e3a8a;
+      --primary-dark: #172554;
+      --primary-soft: #eff6ff;
+      --accent: #0d9488;
+      --accent-soft: #f0fdfa;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --warn: #b45309;
+      --warn-bg: #fef3c7;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --radius: 14px;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+    }
+
+    .topbar-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand p {
+      font-size: 0.9rem;
+      color: #dbeafe;
+    }
+
+    .contact-chip {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 24px auto 48px;
+      padding: 0 16px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--surface);
+      padding: 8px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      background: var(--surface-alt);
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .tab-btn.hidden-tab {
+      display: none;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .card-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 10px;
+      border: none;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-accent:hover {
+      filter: brightness(0.94);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-soft);
+    }
+
+    .btn-sm {
+      padding: 7px 13px;
+      font-size: 0.88rem;
+      border-radius: 8px;
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .alert {
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin-top: 14px;
+      font-weight: 500;
+      font-size: 0.96rem;
+    }
+
+    .alert-success {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #bbf7d0;
+    }
+
+    .alert-warn {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid #fde68a;
+    }
+
+    .alert-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+
+    .alert-info {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border: 1px solid #bfdbfe;
+    }
+
+    .payment-box {
+      background: var(--accent-soft);
+      border: 1px dashed var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .payment-box h3 {
+      color: var(--accent);
+      font-size: 1.08rem;
+      margin-bottom: 6px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stat-tile {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .stat-label {
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .stat-value {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-top: 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .badge-paid {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .badge-due {
+      background: var(--warn-bg);
+      color: var(--warn);
+    }
+
+    .list-item {
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .list-item-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .list-item-title {
+      font-weight: 700;
+      font-size: 1.08rem;
+      color: var(--primary-dark);
+    }
+
+    .meta-tag {
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--primary-soft);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .student-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--primary-soft);
+      border: 1px solid #bfdbfe;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 18px;
+      }
+      .tab-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        font-size: 0.9rem;
+        padding: 9px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <h1>KHAN EDUCATION • SSC 2027</h1>
+        <p>Mathematics • Physics • Chemistry • English — স্টুডেন্ট পোর্টাল</p>
+      </div>
+      <div class="contact-chip">
+        হেল্পলাইন: 01345350508 | WA: 01540-128813
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- মূল নেভিগেশন ট্যাবসমূহ -->
+    <nav class="nav-tabs" aria-label="Main Navigation">
+      <button type="button" class="tab-btn active" data-tab="admission" onclick="switchTab('admission')">
+        নতুন ভর্তি (Admission)
+      </button>
+      <button type="button" class="tab-btn" data-tab="check-id" onclick="switchTab('check-id')">
+        ID / PIN জানুন
+      </button>
+      <button type="button" class="tab-btn" id="navLoginBtn" data-tab="login" onclick="switchTab('login')">
+        শিক্ষার্থী লগইন
+      </button>
+      <button type="button" class="tab-btn hidden-tab" data-tab="profile" onclick="switchTab('profile')">
+        প্রোফাইল ও স্কোর
+      </button>
+      <button type="button" class="tab-btn hidden-tab" data-tab="homework" onclick="switchTab('homework')">
+        আজকের হোমওয়ার্ক
+      </button>
+      <button type="button" class="tab-btn hidden-tab" data-tab="guides" onclick="switchTab('guides')">
+        গাইড ও নোটস
+      </button>
+      <button type="button" class="tab-btn hidden-tab" data-tab="payment" onclick="switchTab('payment')">
+        ২য় কিস্তি TxnID
+      </button>
+    </nav>
+
+    <!-- লগইন করা থাকলে উপরের ছোট স্টুডেন্ট বার -->
+    <div id="loggedInBar" class="student-bar hidden">
+      <div>
+        <strong>লগইন করা আছে:</strong> <span id="barStudentName"></span>
+        <span class="meta-tag" id="barStudentId"></span>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm" onclick="logoutStudent()">লগআউট</button>
+    </div>
+
+    <!-- ১. নতুন ভর্তি ও নগদ TxnID সাবমিশন -->
+    <section id="tab-admission" class="card">
+      <div class="card-header">
+        <h2>SSC 2027 ব্যাচে অনলাইন ভর্তি</h2>
+        <p>নিচের নগদ নির্দেশনা অনুযায়ী ফি পাঠিয়ে Transaction ID (TxnID) ও তথ্য জমা দিন।</p>
+      </div>
+
+      <div class="payment-box">
+        <h3>নগদ (Nagad) পেমেন্ট নির্দেশনা</h3>
+        <p>
+          প্রথমে আপনার নির্ধারিত কোর্স ফি / ১ম কিস্তি আমাদের <strong>Nagad</strong> নম্বরে <strong>Send Money</strong> করুন এবং প্রাপ্ত <strong>TxnID</strong> নিচের ফরমে বসিয়ে সাবমিট করুন।
+        </p>
+        <p style="margin-top:6px; font-size:0.92rem; color:#0f766e;">
+          <strong>প্রয়োজনে যোগাযোগ:</strong> 01345350508 / 01540-128813
+        </p>
+      </div>
+
+      <form id="admissionForm" onsubmit="submitAdmission(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="admName">শিক্ষার্থীর পূর্ণ নাম *</label>
+            <input type="text" id="admName" required placeholder="যেমন: রাফিউল ইসলাম" />
+          </div>
+          <div class="form-group">
+            <label for="admSchool">স্কুলের নাম *</label>
+            <input type="text" id="admSchool" required placeholder="যেমন: বিরামপুর পাইলট উচ্চ বিদ্যালয়" />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="admPhone">মোবাইল নম্বর (১১ ডিজিট) *</label>
+            <input type="tel" id="admPhone" required placeholder="017XXXXXXXX" />
+          </div>
+          <div class="form-group">
+            <label for="admTxnid">Nagad Transaction ID (TxnID) *</label>
+            <input type="text" id="admTxnid" required placeholder="যেমন: 8ABC12XYZ9" />
+          </div>
+        </div>
+        <button type="submit" id="admSubmitBtn" class="btn btn-primary">ভর্তি আবেদন জমা দিন</button>
+      </form>
+      <div id="admResult"></div>
+    </section>
+
+    <!-- ২. ID / PIN চেক -->
+    <section id="tab-check-id" class="card hidden">
+      <div class="card-header">
+        <h2>নিজের Student ID ও PIN জানুন</h2>
+        <p>ভর্তি আবেদন অনুমোদিত হওয়ার পর এখানে আপনার মোবাইল নম্বর দিয়ে ID ও PIN দেখে নিতে পারবেন।</p>
+      </div>
+
+      <form id="checkIdForm" onsubmit="checkStudentId(event)">
+        <div class="form-group">
+          <label for="checkPhone">ভর্তি ফরমে দেওয়া মোবাইল নম্বর</label>
+          <input type="tel" id="checkPhone" required placeholder="017XXXXXXXX" />
+        </div>
+        <button type="submit" id="checkIdBtn" class="btn btn-accent">ID ও PIN খুঁজুন</button>
+      </form>
+      <div id="checkIdResult"></div>
+    </section>
+
+    <!-- ৩. শিক্ষার্থী লগইন -->
+    <section id="tab-login" class="card hidden">
+      <div class="card-header">
+        <h2>শিক্ষার্থী পোর্টাল লগইন</h2>
+        <p>আপনার Student ID এবং PIN দিয়ে প্রোফাইল, স্কোর, হোমওয়ার্ক ও গাইডসমূহ দেখুন।</p>
+      </div>
+
+      <form id="loginForm" onsubmit="loginStudent(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="loginId">Student ID</label>
+            <input type="text" id="loginId" required placeholder="যেমন: KE2701" />
+          </div>
+          <div class="form-group">
+            <label for="loginPin">PIN</label>
+            <input type="password" id="loginPin" required placeholder="আপনার গোপন PIN" />
+          </div>
+        </div>
+        <button type="submit" id="loginBtn" class="btn btn-primary">লগইন করুন</button>
+      </form>
+      <div id="loginResult"></div>
+    </section>
+
+    <!-- ৪. প্রোফাইল ও স্কোরিং তথ্যাদি -->
+    <section id="tab-profile" class="card hidden">
+      <div class="card-header">
+        <h2>প্রোফাইল ও স্কোরিং তথ্যাদি</h2>
+        <p>আপনার ব্যক্তিগত তথ্য, কিস্তির অবস্থা, পরীক্ষার/হোমওয়ার্ক স্কোর ও শিক্ষকের মন্তব্য।</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-tile">
+          <div class="stat-label">শিক্ষার্থীর নাম</div>
+          <div class="stat-value" id="profName">-</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-label">Student ID</div>
+          <div class="stat-value" id="profId">-</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-label">মোট স্কোর</div>
+          <div class="stat-value" id="profScore">-</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-label">১ম কিস্তি</div>
+          <div class="stat-value" id="profInst1">-</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-label">২য় কিস্তি</div>
+          <div class="stat-value" id="profInst2">-</div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="list-item-top">
+          <span class="list-item-title">অতিরিক্ত তথ্য</span>
+        </div>
+        <p><strong>স্কুল:</strong> <span id="profSchool">-</span></p>
+        <p><strong>মোবাইল:</strong> <span id="profPhone">-</span></p>
+        <p style="margin-top:8px;"><strong>শিক্ষকের মন্তব্য:</strong> <span id="profRemarks">-</span></p>
+      </div>
+    </section>
+
+    <!-- ৫. আজকের হোমওয়ার্ক -->
+    <section id="tab-homework" class="card hidden">
+      <div class="card-header">
+        <h2>আজকের হোমওয়ার্ক</h2>
+        <p>বিষয়ভিত্তিক নির্ধারিত হোমওয়ার্ক ও জমা দেওয়ার লিংকসমূহ।</p>
+      </div>
+      <div id="homeworkList"></div>
+    </section>
+
+    <!-- ৬. খান এডুকেশন গাইডসমূহ -->
+    <section id="tab-guides" class="card hidden">
+      <div class="card-header">
+        <h2>খান এডুকেশন গাইড ও নোটস</h2>
+        <p>পড়াশোনার গাইডলাইন, শিট ও প্রয়োজনীয় রিসোর্স লিংক।</p>
+      </div>
+      <div id="guidesList"></div>
+    </section>
+
+    <!-- ৭. ২য় কিস্তি নগদ TxnID সাবমিশন -->
+    <section id="tab-payment" class="card hidden">
+      <div class="card-header">
+        <h2>২য় কিস্তি পেমেন্ট TxnID জমা দিন</h2>
+        <p>নগদে ২য় কিস্তি পাঠানোর পর নিচে Transaction ID লিখে জমা দিন।</p>
+      </div>
+
+      <form id="paymentForm" onsubmit="submitPayment(event)">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="payStudentId">Student ID</label>
+            <input type="text" id="payStudentId" readonly />
+          </div>
+          <div class="form-group">
+            <label for="payInstallment">কিস্তি</label>
+            <select id="payInstallment">
+              <option value="Installment 2">২য় কিস্তি (Installment 2)</option>
+              <option value="Installment 1">১ম কিস্তি (Installment 1)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="payTxnid">Nagad Transaction ID (TxnID) *</label>
+          <input type="text" id="payTxnid" required placeholder="যেমন: 9XYZ45ABC1" />
+        </div>
+        <button type="submit" id="paySubmitBtn" class="btn btn-primary">TxnID জমা দিন</button>
+      </form>
+      <div id="payResult"></div>
+    </section>
+  </main>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKOyeIf20rHDyZOfJh-At64MV03Czya5wHIsXEq-CeEkFIJk_np8GVfa7CTxQMpkNe/exec";
+
+    let currentSession = null;
+
+    function switchTab(tabName) {
+      const protectedTabs = ['profile', 'homework', 'guides', 'payment'];
+      if (protectedTabs.includes(tabName) && !currentSession) {
+        tabName = 'login';
+      }
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+      });
+
+      document.querySelectorAll('section.card').forEach(sec => {
+        sec.classList.toggle('hidden', sec.id !== 'tab-' + tabName);
+      });
+    }
+
+    function setProtectedTabsVisible(visible) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (['profile', 'homework', 'guides', 'payment'].includes(btn.dataset.tab)) {
+          btn.classList.toggle('hidden-tab', !visible);
+        }
+      });
+      document.getElementById('navLoginBtn').classList.toggle('hidden-tab', visible);
+      document.getElementById('loggedInBar').classList.toggle('hidden', !visible);
+    }
+
+    function renderAlert(containerId, type, message) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = `<div class="alert alert-${type}">${escapeHtml(message)}</div>`;
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatStatusBadge(val) {
+      const v = String(val || 'Due').trim();
+      const isPaid = v.toLowerCase() === 'paid';
+      return `<span class="badge ${isPaid ? 'badge-paid' : 'badge-due'}">${escapeHtml(v)}</span>`;
+    }
+
+    async function submitAdmission(e) {
+      e.preventDefault();
+      const btn = document.getElementById('admSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'জমা হচ্ছে...';
+
+      const payload = {
+        action: 'admission',
+        name: document.getElementById('admName').value.trim(),
+        school: document.getElementById('admSchool').value.trim(),
+        phone: document.getElementById('admPhone').value.trim(),
+        txnid: document.getElementById('admTxnid').value.trim()
+      };
+
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+          renderAlert('admResult', 'success', data.message + ' অনুমোদনের পর "ID / PIN জানুন" ট্যাবে মোবাইল নম্বর দিয়ে আপনার ID ও PIN দেখতে পারবেন।');
+          document.getElementById('admissionForm').reset();
+        } else {
+          renderAlert('admResult', 'danger', data.message || 'জমা করতে সমস্যা হয়েছে।');
+        }
+      } catch (err) {
+        renderAlert('admResult', 'danger', 'নেটওয়ার্ক বা সার্ভার সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'ভর্তি আবেদন জমা দিন';
+      }
+    }
+
+    async function checkStudentId(e) {
+      e.preventDefault();
+      const btn = document.getElementById('checkIdBtn');
+      const phone = document.getElementById('checkPhone').value.trim();
+      btn.disabled = true;
+      btn.textContent = 'খোঁজা হচ্ছে...';
+
+      try {
+        const url = `${SCRIPT_URL}?action=check_id&phone=${encodeURIComponent(phone)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.status === 'success' && data.found) {
+          document.getElementById('checkIdResult').innerHTML = `
+            <div class="alert alert-success">
+              <strong>ভর্তি অনুমোদিত হয়েছে!</strong><br>
+              নাম: <strong>${escapeHtml(data.name)}</strong><br>
+              Student ID: <strong>${escapeHtml(data.id)}</strong><br>
+              PIN: <strong>${escapeHtml(data.pin)}</strong><br>
+              <button type="button" class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="prefillLogin('${escapeHtml(data.id)}', '${escapeHtml(data.pin)}')">
+                এখনই লগইন পেজে যান
+              </button>
+            </div>
+          `;
+        } else if (data.status === 'success') {
+          renderAlert('checkIdResult', 'warn', data.message || 'তথ্য পাওয়া যায়নি।');
+        } else {
+          renderAlert('checkIdResult', 'danger', data.message || 'তথ্য যাচাই করা যায়নি।');
+        }
+      } catch (err) {
+        renderAlert('checkIdResult', 'danger', 'সার্ভার থেকে তথ্য আনতে সমস্যা হয়েছে।');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'ID ও PIN খুঁজুন';
+      }
+    }
+
+    function prefillLogin(id, pin) {
+      document.getElementById('loginId').value = id;
+      document.get
